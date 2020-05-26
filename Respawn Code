@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+public class PlayerFallRespawn : MonoBehaviour
+{
+    public Transform respawnPoint;//Add empty gameobject as spawnPoint
+    public float minHeightForDeath;
+    public GameObject player; //Add your player
+    public Quaternion originalRotationValue;
+    float rotationResetSpeed = 1.0f;
+
+    void Update()
+    {
+        if (player.transform.position.y < minHeightForDeath)
+        {
+           
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, originalRotationValue, Time.time * rotationResetSpeed);
+            player.transform.position = respawnPoint.transform.position;
+        }
+    }
+
+    //There are many ways to do this. This is just one way
+    //Try not to use Physics if you don't need it(there is a way to 
+    //do this by using Physics)
+}
